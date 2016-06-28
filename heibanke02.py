@@ -4,6 +4,7 @@ import re
 
 def getData(password):
     data = {
+        "csrfmiddlewaretoken":"u6wGrbEnmcfKCaHCsO2wkszyMQnQOMS1",
         "username":"Jiao",
         "password":password
     }
@@ -18,10 +19,14 @@ def getResult(response):
 
 def getPassword():
     url="http://www.heibanke.com/lesson/crawler_ex02/"
+    hdr = {
+        "Cookie":"sessionid=gl86prhdtovhwd4xddk3x6d5eelzeaz3; csrftoken=u6wGrbEnmcfKCaHCsO2wkszyMQnQOMS1; Hm_lvt_74e694103cf02b31b28db0a346da0b6b=1466992468,1467076208; Hm_lpvt_74e694103cf02b31b28db0a346da0b6b=1467077707",
+    }
     for i in range(0,30):
         data  = getData(i)
         post_data = parse.urlencode(data).encode("utf-8")
-        response = request.urlopen(url,post_data)
+        req = request.Request(url,post_data,headers=hdr)
+        response = request.urlopen(req)
         result = getResult(response)
         if result:
             return i
