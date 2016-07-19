@@ -1,9 +1,10 @@
 # coding=utf-8
-import re
+import re, tool;
 import pytesseract
 from urllib import request, parse
 from PIL import Image
 
+from tool import time_decorato
 
 CAPTCHA_0 = 'captcha_0'
 CAPTCHA_1 = 'captcha_1'
@@ -76,7 +77,7 @@ def ex_04():
    msg, password = execute()
    print( '%s,，密码为%s' % (msg, password))
 
-
+@time_decorato
 def execute():
      #访问登录页面
     url = 'http://www.heibanke.com/lesson/crawler_ex04/'
